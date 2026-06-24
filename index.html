@@ -1,0 +1,1144 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Career Prep High School — Built for students who needed something different</title>
+  <meta name="description" content="A free public charter high school in Ohio. Earn your accredited diploma, build real career skills, and create a plan for your life — at your pace, on a schedule that works for you." />
+
+  <!-- Manrope (per brand guidelines) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css?v=2026-06-10bj" />
+
+  <!-- HubSpot Forms v3 embed loader (used by the application form on Start Today) -->
+  <script src="https://js.hsforms.net/forms/embed/23862493.js" defer></script>
+
+  <!-- Leaflet — interactive map on the Locations page -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+          integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin="" defer></script>
+</head>
+<body>
+
+  <!-- ==========================================================
+       SITE HEADER  (menu rendered from site-config.js)
+       ========================================================== -->
+  <header class="site-header">
+    <div class="container nav">
+      <a href="#home" class="nav-logo" aria-label="Career Prep High School home">
+        <img id="navLogo" src="Asset 1@1x (1).png" alt="Career Prep High School" />
+      </a>
+      <nav>
+        <ul class="nav-list" id="navList"></ul>
+      </nav>
+      <!-- Persistent Start Today CTA — always visible on every page,
+           never collapses into the hamburger. -->
+      <a href="#start" class="nav-start-cta" id="navStartCta">Start Today</a>
+      <button class="nav-toggle" aria-label="Open menu" aria-expanded="false" id="navToggle">
+        <span class="nav-toggle-bars" aria-hidden="true">
+          <span></span><span></span><span></span>
+        </span>
+        <span class="nav-toggle-label">Menu</span>
+      </button>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- ============================================================
+         PAGE: HOME
+         ============================================================ -->
+    <section id="home" class="page is-current" data-page="home">
+
+      <!-- MODULE: HERO — centered, stacked vertically: text → video → CTA -->
+      <div class="hero" data-module="home.hero">
+        <!-- Sliding student-photo collage as a faint background behind the hero text. -->
+        <div class="hero-collage" aria-hidden="true">
+          <div class="home-collage-viewport" data-module="home.collage">
+            <div class="home-collage-track" id="homeCollageTrack"></div>
+          </div>
+        </div>
+        <div class="container hero-stack">
+          <div class="hero-text">
+            <span class="eyebrow" id="heroEyebrow"></span>
+            <h1 id="heroHeadline"></h1>
+            <div id="heroBody"></div>
+            <p class="promise" id="heroPromise"></p>
+          </div>
+          <div class="hero-video-col">
+            <div class="video-frame" id="videoFrame">
+              <!-- Replace placeholder by setting `videoHero.embedUrl` in site-config.js -->
+              <div class="video-placeholder" id="videoPlaceholder">
+                <div class="placeholder-tag">Video placeholder</div>
+                <div class="play-icon" aria-hidden="true">▶</div>
+                <strong id="videoPlaceholderTitle"></strong>
+                <span id="videoPlaceholderSub"></span>
+              </div>
+            </div>
+            <p class="hero-video-caption" id="heroVideoCaption"></p>
+          </div>
+          <div class="hero-cta" id="heroCta"></div>
+        </div>
+      </div>
+
+      <!-- MODULE: IMPACT STATS — "Lives changed" proof numbers. -->
+      <div class="impact-stats-band" data-module="home.impactStats">
+        <div class="container impact-stats-section">
+          <span class="eyebrow" id="impactEyebrow"></span>
+          <h2 id="impactHeadline" style="margin-bottom:6px;"></h2>
+          <p class="lead" id="impactSub" style="margin-bottom:24px;"></p>
+          <div class="impact-stats-grid" id="impactStatsGrid"></div>
+        </div>
+      </div>
+
+      <!-- Sliding graduate-photo collage — sits flush against the stats above.
+           No heading; the photos pick up where the numbers leave off. -->
+      <div class="grad-collage grad-collage-full" id="gradCollage" data-module="home.gradCollage" aria-label="Recent graduates">
+        <div class="grad-collage-viewport">
+          <div class="grad-collage-track" id="gradCollageTrack"></div>
+        </div>
+      </div>
+
+      <!-- MODULE: "Real students. Real change." — testimonial card marquee. -->
+      <div class="written-testimonials" data-module="home.writtenTestimonials">
+        <div class="container">
+          <span class="eyebrow" id="wtEyebrow"></span>
+          <h2 id="wtHeadline"></h2>
+        </div>
+        <div class="wt-marquee wt-marquee-full" aria-label="Student voices">
+          <div class="wt-marquee-viewport">
+            <div class="wt-marquee-track" id="wtGrid"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- MODULE: TRUSTED BY — partner logos. Placed high (right after the impact
+           section) to stack credibility near the top of the page. -->
+      <div class="container sponsored-section" data-module="home.sponsored" style="margin-top:48px;">
+        <span class="eyebrow" id="sponsoredEyebrow"></span>
+        <h2 id="sponsoredHeadline" style="margin-bottom:8px;"></h2>
+        <p class="lead" id="sponsoredSub" style="margin-bottom:20px;"></p>
+        <div class="sponsored-grid" id="sponsoredGrid"></div>
+      </div>
+
+      <!-- MODULE: VALUE PROPS strip -->
+      <div class="values" data-module="home.valueProps">
+        <div class="container grid cols-4" id="valueProps"></div>
+      </div>
+
+      <!-- MODULE #2: PAIN POINTS — moved high so it's one of the first things visitors see.
+           "Career Prep exists for students who don't fit the traditional system." -->
+      <div class="container pain-points-section" data-module="home.painPoints" style="margin-top:48px;">
+        <span class="eyebrow" id="homePainPointsEyebrow"></span>
+        <h2 id="homePainPointsHeadline"></h2>
+        <p class="lead" id="homePainPointsBody" style="margin-bottom:28px;"></p>
+        <div class="pain-points-grid" id="homePainPointsGrid"></div>
+      </div>
+
+      <!-- MODULE: PATHWAYS preview — the 7 career pathway tiles -->
+      <div class="page" data-module="home.pathwaysPreview" style="display:block; padding: clamp(48px, 7vw, 88px) 0; border-bottom: 0;">
+        <div class="container">
+          <span class="eyebrow" style="display:inline-block;margin-bottom:14px;">Career Pathways</span>
+          <h2 style="margin-bottom:8px;">Real skills. Real certifications. 100% free.</h2>
+          <p class="lead" style="margin-bottom:28px;">Pick a path that lands you in a real job — every certification is free.</p>
+          <div class="pathway-icons" id="homePathwaysPreview"></div>
+          <div class="mission-explore-cta" style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;">
+            <a class="btn btn-outline" id="homeQuizCta2" href="#" data-action="open-quiz">Not sure? Take the Career Quiz →</a>
+            <a class="btn btn-primary btn-pop" href="#pathways">Explore all Career Pathways →</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- MODULE: Workforce Development Partners — scrolling logo marquee. -->
+      <div class="container" data-module="home.workforce" style="margin-top:8px;">
+        <h3 class="workforce-marquee-title">Workforce Development Partners</h3>
+        <div class="workforce-marquee">
+          <div class="workforce-marquee-track" id="homeWorkforceTrack"></div>
+        </div>
+      </div>
+
+      <!-- MODULE: MISSION strip — wraparound services circle graph (under pathway cards) -->
+      <div class="mission-strip" data-module="home.missionStrip">
+        <div class="container">
+          <h2 class="mission-big-headline" id="missionHeadline">What every student gets, no matter what</h2>
+          <ol class="ecosystem mission-ecosystem" id="missionEcosystem"></ol>
+        </div>
+      </div>
+
+      <!-- MODULE: FAQ preview (collapsible) -->
+      <div class="faq-preview" data-module="home.faqPreview">
+        <div class="container">
+          <span class="eyebrow">FAQ</span>
+          <h2>Quick answers</h2>
+          <div class="faq" id="homeFaqList"></div>
+          <p style="text-align:center;margin-top:18px;">
+            <a class="btn btn-outline" href="#faq">See all questions →</a>
+          </p>
+        </div>
+      </div>
+
+      <!-- MODULE: HOW IT WORKS — the four-step mountain climb, moved DOWN so
+           it sits right before the closing CTA. -->
+      <div class="how-it-works" data-module="home.howItWorks">
+        <div class="container">
+          <span class="eyebrow" id="hiwEyebrow"></span>
+          <h2 id="hiwHeadline" class="hiw-headline-onerow">We'll climb with you every step of the way.</h2>
+          <p class="lead hiw-sub" id="hiwSub" style="margin-bottom:24px;"></p>
+
+          <div class="hiw-mountain mountain-journey" aria-label="The four-step climb toward your diploma">
+            <svg class="mountain-bg" viewBox="0 0 1000 600" preserveAspectRatio="none" aria-hidden="true">
+              <defs>
+                <linearGradient id="hiwSky" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#0a2a6b"/>
+                  <stop offset="100%" stop-color="#071E4F"/>
+                </linearGradient>
+                <linearGradient id="hiwFace" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#15EC75" stop-opacity=".35"/>
+                  <stop offset="100%" stop-color="#15EC75" stop-opacity=".05"/>
+                </linearGradient>
+              </defs>
+              <rect width="1000" height="600" fill="url(#hiwSky)"/>
+              <polygon points="0,600 250,200 480,420 700,260 1000,600" fill="rgba(255,255,255,.06)"/>
+              <polygon points="0,600 400,80 1000,600" fill="url(#hiwFace)" stroke="rgba(21,236,117,.45)" stroke-width="2"/>
+              <polygon points="378,108 400,80 422,108 410,118 400,114 390,118" fill="rgba(255,255,255,.85)"/>
+              <path class="hiw-climb-path"
+                    d="M 90 540 C 240 480, 280 420, 360 360 C 440 300, 460 240, 400 110"
+                    fill="none" stroke="#15EC75" stroke-width="4" stroke-linecap="round"
+                    stroke-dasharray="8 12"/>
+            </svg>
+            <ol class="mountain-items hiw-mountain-items" id="hiwSteps"></ol>
+            <div class="mountain-peak hiw-peak" aria-label="Your diploma — the summit">
+              <span class="peak-icon" aria-hidden="true">🎓</span>
+              <span class="peak-label">Your diploma</span>
+            </div>
+          </div>
+
+          <div class="hiw-cta" style="margin-top:32px;">
+            <a class="btn btn-primary btn-pop" id="hiwCta"></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- MODULE: CTA band -->
+      <div class="cta-band" data-module="home.ctaBand">
+        <div class="container row">
+          <div>
+            <span class="eyebrow on-dark">Let's talk</span>
+            <h2>Change your life today. Land your dream career.</h2>
+            <p style="max-width:54ch;">100% free. No tuition. No catch. Just a path to a real diploma — and a real future.</p>
+          </div>
+          <div style="display:flex;gap:12px;flex-wrap:wrap;">
+            <a class="btn btn-primary btn-pop" id="ctaBandApply" href="#start">Apply now</a>
+            <a class="btn btn-ghost-light" href="#locations">Call a real person</a>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ============================================================
+         PAGE: WHY WE'RE DIFFERENT
+         ============================================================ -->
+    <section id="why" class="page" data-page="why">
+
+      <!-- MODULE: HERO — navy band with a faded sliding collage of graduates as
+           the background, on-brand headline overlaid. -->
+      <div class="why-hero" data-module="why.heroPhoto">
+        <div class="why-hero-collage" aria-hidden="true">
+          <div class="grad-collage-track" id="whyHeroGradTrack"></div>
+        </div>
+        <div class="container why-hero-content">
+          <span class="eyebrow">Why we're different</span>
+          <h1>Built differently. On purpose.</h1>
+          <p class="lead">You don't need another version of the system that already failed you. You need something built around how your life actually works.</p>
+        </div>
+      </div>
+      <!-- Legacy heroPhoto figure kept hidden — older code expects this id. -->
+      <figure class="stock-photo" id="whyHeroPhoto" hidden></figure>
+
+      <!-- MODULE: MISSION block — hidden via modules.why.mission = false; kept for renderer compatibility -->
+      <div class="container" data-module="why.mission">
+        <span class="eyebrow" id="whyEyebrow"></span>
+        <h1 id="whyHeadline"></h1>
+        <div class="grid cols-2" style="margin-top:28px;align-items:start;">
+          <div id="whyBody" class="lead"></div>
+          <div>
+            <p class="muted" style="font-size:15px;letter-spacing:.06em;text-transform:uppercase;font-weight:700;">Fusion Ed mission</p>
+            <p style="font-weight:700;font-size:22px;color:var(--navy);" id="fusionMission"></p>
+          </div>
+        </div>
+        <p style="font-size:clamp(28px,3.4vw,40px);font-weight:800;color:var(--navy);margin-top:36px;line-height:1.15;" id="whyPullQuote"></p>
+      </div>
+
+      <!-- MODULE: PAIN POINTS WE ADDRESS — listed before the comparison chart -->
+      <div class="container" data-module="why.painPoints" style="margin-top:48px;">
+        <span class="eyebrow" id="painPointsEyebrow"></span>
+        <h2 id="painPointsHeadline"></h2>
+        <p class="lead" id="painPointsBody" style="margin-bottom:28px;"></p>
+        <div class="pain-points-grid" id="painPointsGrid"></div>
+      </div>
+
+      <!-- MODULE: COMPARISON CHART -->
+      <div class="container" data-module="why.comparisonChart" style="margin-top:64px;">
+        <h2 id="compareHeadline" style="margin-bottom:20px;"></h2>
+        <div style="overflow-x:auto;">
+          <table class="compare" id="compareTable">
+            <thead><tr id="compareHead"></tr></thead>
+            <tbody id="compareBody"></tbody>
+          </table>
+        </div>
+        <div class="compare-cta" style="text-align:center;margin-top:32px;">
+          <a class="btn btn-primary btn-pop" id="whyCompareCta">Start Today →</a>
+        </div>
+      </div>
+
+      <!-- MODULE: PROMISE list — rendered as a mountain journey to the diploma -->
+      <div class="container" data-module="why.promiseList" style="margin-top:72px;">
+        <h2 id="promiseHeadline"></h2>
+        <p class="lead" id="promiseSub" style="margin-bottom:24px;"></p>
+        <div class="mountain-journey">
+          <!-- Background sky + mountain layers (decorative) -->
+          <svg class="mountain-bg" viewBox="0 0 1000 600" preserveAspectRatio="none" aria-hidden="true">
+            <defs>
+              <linearGradient id="mtnSky" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#0a2a6b"/>
+                <stop offset="100%" stop-color="#071E4F"/>
+              </linearGradient>
+              <linearGradient id="mtnFace" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#15EC75" stop-opacity=".35"/>
+                <stop offset="100%" stop-color="#15EC75" stop-opacity=".05"/>
+              </linearGradient>
+            </defs>
+            <rect width="1000" height="600" fill="url(#mtnSky)"/>
+            <!-- back ridge -->
+            <polygon points="0,600 250,200 480,420 700,260 1000,600" fill="rgba(255,255,255,.06)"/>
+            <!-- front mountain -->
+            <polygon points="0,600 400,80 1000,600" fill="url(#mtnFace)" stroke="rgba(21,236,117,.35)" stroke-width="2"/>
+            <!-- snow cap -->
+            <polygon points="378,108 400,80 422,108 410,118 400,114 390,118" fill="rgba(255,255,255,.85)"/>
+          </svg>
+          <!-- Climbing milestones -->
+          <ol class="mountain-items" id="promiseList"></ol>
+          <!-- Diploma at the peak -->
+          <div class="mountain-peak" aria-label="Your diploma — the destination">
+            <span class="peak-icon" aria-hidden="true">🎓</span>
+            <span class="peak-label">Your diploma</span>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ============================================================
+         PAGE: CAREER PATHWAYS
+         ============================================================ -->
+    <section id="pathways" class="page" data-page="pathways">
+      <!-- MODULE: Workforce Development Partners — scrolling marquee at the top. -->
+      <div class="container" data-module="pathways.workforce">
+        <h3 class="workforce-marquee-title" id="workforceHeadline">Workforce Development Partners</h3>
+        <div class="workforce-marquee">
+          <div class="workforce-marquee-track" id="workforceGrid"></div>
+        </div>
+      </div>
+      <div class="container" data-module="pathways.intro" style="margin-top:48px;">
+        <span class="eyebrow" id="pathwaysEyebrow"></span>
+        <h1 id="pathwaysHeadline"></h1>
+        <p class="lead" id="pathwaysBody"></p>
+      </div>
+      <div class="container" data-module="pathways.grid" style="margin-top:36px;">
+        <div class="grid cols-3" id="pathwaysGrid"></div>
+      </div>
+      <div class="container" data-module="pathways.certNote" style="margin-top:36px;">
+        <div class="notice" id="pathwaysNote"></div>
+      </div>
+      <!-- CTA — sends visitors straight to the Start Today page where they
+           can pick their campus and apply. -->
+      <div class="container pathways-cta" data-module="pathways.ctaBand" style="margin-top:48px;">
+        <a class="btn btn-primary btn-pop btn-lg" href="#start">Apply Now →</a>
+        <a class="btn btn-outline" href="#" data-action="open-quiz">Not sure? Take the Career Quiz</a>
+      </div>
+    </section>
+
+    <!-- PAGE: STUDENT LIFE — retired. "Student Life" in the menu now opens the
+         Why We're Different page; its dropdown links to Resources, FAQ, Blog. -->
+
+    <!-- ============================================================
+         PAGE: GRADUATES (sub-page of Student Life)
+         ============================================================ -->
+    <section id="graduates" class="page" data-page="graduates">
+      <!-- MODULE: Intro -->
+      <div class="container" data-module="graduates.intro" style="margin-top:16px;">
+        <span class="eyebrow" id="gradIntroEyebrow"></span>
+        <h1 id="gradIntroHeadline"></h1>
+        <p class="lead" id="gradIntroBody"></p>
+      </div>
+
+      <!-- MODULE: Graduation component piece -->
+      <div class="container" data-module="graduates.graduation" style="margin-top:56px;">
+        <span class="eyebrow" id="gradGraduationEyebrow"></span>
+        <h2 id="gradGraduationHeadline" style="margin-bottom:8px;"></h2>
+        <p class="lead" id="gradGraduationBody" style="margin-bottom:20px;"></p>
+        <div class="grad-ceremony-card">
+          <ul class="grad-ceremony-list" id="gradCeremonyList"></ul>
+        </div>
+        <div class="grad-photos" id="gradGraduationPhotos">
+          <p class="placeholder-tag" id="gradGraduationPhotosPlaceholder" style="position:static;align-self:flex-start;display:inline-block;"></p>
+        </div>
+      </div>
+
+      <!-- MODULE: Before & After -->
+      <div class="container" data-module="graduates.beforeAfter" style="margin-top:64px;">
+        <span class="eyebrow" id="gradBeforeAfterEyebrow"></span>
+        <h2 id="gradBeforeAfterHeadline" style="margin-bottom:8px;"></h2>
+        <p class="lead" id="gradBeforeAfterBody" style="margin-bottom:24px;"></p>
+        <div class="grad-stories" id="gradBeforeAfterGrid"></div>
+      </div>
+
+      <!-- MODULE: Where Are They Now? -->
+      <div class="container" data-module="graduates.whereNow" style="margin-top:64px;margin-bottom:64px;">
+        <span class="eyebrow" id="gradWhereNowEyebrow"></span>
+        <h2 id="gradWhereNowHeadline" style="margin-bottom:8px;"></h2>
+        <p class="lead" id="gradWhereNowBody" style="margin-bottom:24px;"></p>
+        <div class="grad-alumni" id="gradWhereNowGrid"></div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         PAGE: LOCATIONS
+         ============================================================ -->
+    <section id="locations" class="page" data-page="locations">
+      <div class="container" data-module="locations.intro">
+        <!-- Real Ohio outline (loaded from outline-oh.svg) + 9 campus pins -->
+        <svg class="ohio-decor" viewBox="0 0 800 665" aria-hidden="true">
+          <defs>
+            <linearGradient id="ohioFill" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%"   stop-color="#15EC75" stop-opacity=".22"/>
+              <stop offset="100%" stop-color="#15EC75" stop-opacity=".06"/>
+            </linearGradient>
+            <linearGradient id="ohioStroke" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%"   stop-color="#15EC75" stop-opacity="1"/>
+              <stop offset="100%" stop-color="#15EC75" stop-opacity=".7"/>
+            </linearGradient>
+            <!-- Reusable map-pin shape (anchored at bottom tip 0,0) — smaller scale -->
+            <symbol id="cphsPin" viewBox="-12 -32 24 32" overflow="visible">
+              <path d="M 0 0 L -8 -17 A 9 9 0 1 1 8 -17 Z"
+                    fill="#15EC75" stroke="#071E4F" stroke-width="2" stroke-linejoin="round"/>
+              <circle cx="0" cy="-19" r="3.6" fill="#071E4F"/>
+            </symbol>
+          </defs>
+          <!-- Real Ohio silhouette path (from outline-oh.svg) -->
+          <path d="M379.539,48.440L379.966,49.000L380.196,51.320L379.164,51.624L376.468,51.198L376.402,50.846L376.810,49.927L377.802,48.565L378.557,48.234ZM380.981,54.077L383.400,53.449L383.910,54.045L382.796,54.813L381.237,56.219L380.726,57.672L380.685,58.245L379.498,58.497L377.700,55.801L379.637,54.426ZM377.943,60.620L380.236,60.191L380.720,59.697L381.976,59.376L382.440,59.619L382.279,60.037L381.811,60.854L377.619,65.510L376.532,66.340L375.476,66.532L375.263,62.981L376.613,61.058ZM395.628,69.597L396.918,69.760L398.477,68.309L398.815,68.496L398.403,72.935L397.641,74.334L397.256,74.590L395.370,74.678L391.990,72.824L390.578,71.725L390.586,71.274L392.987,68.183L394.620,68.187L395.169,68.543ZM481.844,561.492L481.602,562.661L480.793,564.287L479.585,566.131L479.330,567.081L479.372,568.012L479.216,568.505L477.895,570.604L476.773,572.630L475.935,573.433L474.742,574.802L474.543,575.970L474.444,577.466L474.884,578.634L475.194,579.862L475.302,580.834L474.962,583.319L474.501,585.309L474.103,585.947L472.128,588.199L471.514,588.599L469.585,589.521L467.924,589.929L466.773,591.105L465.351,592.201L464.612,592.927L464.218,593.475L463.607,595.023L463.614,596.367L463.766,597.473L464.311,598.455L465.656,599.258L466.452,599.908L466.829,600.390L467.294,601.352L467.626,603.403L468.138,604.095L468.337,604.695L468.578,606.807L468.862,608.009L469.160,609.301L469.104,609.902L468.791,611.048L468.067,613.195L467.967,614.469L468.422,615.870L468.649,616.943L468.720,618.252L469.643,620.198L469.970,621.308L470.325,623.053L470.552,623.689L470.638,624.362L470.638,625.580L470.197,627.543L469.899,628.397L469.231,629.197L468.266,629.996L467.547,630.339L465.936,630.590L463.977,630.596L463.522,630.651L460.142,629.361L459.218,629.306L457.855,629.415L456.520,629.924L456.122,630.233L453.708,632.904L453.395,633.558L453.338,634.048L453.424,636.301L453.083,640.260L452.784,641.204L452.429,641.912L452.060,643.037L451.904,644.036L452.032,646.450L451.868,647.915L451.566,648.934L450.957,650.299L450.691,651.579L450.489,653.036L449.896,654.887L449.059,656.449L448.159,657.313L446.696,657.957L443.926,658.384L440.854,659.075L439.722,659.153L437.572,658.248L433.383,659.928L431.579,660.490L429.790,660.907L425.969,662.103L422.972,663.426L419.862,664.441L418.353,664.716L416.990,664.800L415.447,664.594L414.211,664.246L413.102,663.791L412.704,663.544L411.529,662.573L410.759,661.427L410.298,660.540L409.752,658.596L409.280,654.531L408.695,653.042L408.375,652.424L407.900,651.867L407.236,651.402L406.437,650.929L404.505,650.067L402.987,648.993L401.758,647.823L400.551,646.191L399.106,644.431L397.083,640.725L396.138,639.601L395.651,639.197L393.649,638.069L392.865,637.503L392.129,636.788L391.261,636.486L390.036,636.535L386.611,636.280L384.371,636.529L382.907,636.361L381.439,635.774L378.592,634.045L375.840,631.600L375.163,630.745L374.754,629.963L374.167,628.297L373.745,626.640L373.531,625.302L373.389,623.109L373.460,620.708L373.020,618.108L372.466,616.489L371.571,614.870L370.819,614.024L370.435,612.687L370.535,611.377L370.762,609.994L371.344,607.555L371.458,606.881L371.529,605.771L371.330,603.732L371.145,603.149L370.733,602.293L370.165,601.528L368.788,600.690L368.077,600.599L363.888,601.783L361.125,603.021L358.888,604.533L357.496,605.661L355.977,606.171L355.025,606.117L353.903,605.698L353.150,605.552L351.372,605.428L349.961,605.659L349.085,605.959L348.690,606.218L348.361,606.566L347.942,607.231L347.590,607.919L347.037,609.385L345.508,611.658L343.915,612.905L341.088,614.340L338.458,615.027L337.792,615.408L337.090,616.051L336.311,617.072L335.645,618.322L335.111,620.860L334.733,621.772L333.870,623.319L333.369,623.943L332.764,624.527L330.763,625.350L329.652,625.437L328.530,625.404L325.867,625.886L324.297,626.003L323.079,625.708L321.368,624.694L320.043,624.074L319.033,623.889L318.173,624.007L317.387,624.318L316.896,624.831L315.964,624.955L315.554,625.171L315.031,625.773L314.915,626.340L312.358,629.223L312.021,629.453L311.267,629.705L310.165,629.416L309.330,628.935L308.817,628.483L307.951,627.405L307.730,626.862L307.588,626.169L307.527,624.957L307.264,623.520L306.518,622.270L304.761,620.782L302.426,619.266L300.975,618.443L299.606,617.909L298.405,617.600L294.530,616.994L293.372,616.644L290.502,616.474L289.566,616.332L288.137,615.636L287.746,615.700L286.574,615.363L285.992,614.880L285.386,614.127L283.958,612.701L282.983,611.957L281.418,611.035L280.252,610.587L279.062,610.345L277.303,610.516L275.036,611.120L273.250,611.742L272.224,612.202L271.368,612.401L271.421,612.233L265.600,613.784L264.011,614.650L263.004,615.748L262.693,616.251L262.527,616.734L262.240,618.327L262.161,619.546L261.729,621.219L261.314,622.358L260.771,623.131L260.320,623.522L259.963,623.680L259.412,623.888L258.758,624.008L258.162,623.983L256.546,623.625L255.689,623.288L253.064,621.864L252.473,621.842L251.729,621.524L251.228,621.149L251.088,620.860L250.681,620.595L248.206,620.371L246.543,620.066L244.764,619.613L244.388,619.471L243.783,619.046L243.384,618.513L242.873,616.949L242.677,616.138L242.276,613.646L241.756,611.693L241.260,610.992L240.754,610.594L239.636,610.050L238.533,609.696L237.459,609.544L236.326,609.157L234.599,607.986L234.218,607.649L233.664,606.911L233.509,606.483L233.393,605.981L233.360,605.372L233.085,604.084L232.867,603.201L232.508,602.311L232.033,601.536L231.046,600.560L229.981,599.939L229.038,599.535L227.059,598.956L224.663,598.489L223.392,598.197L222.782,598.215L221.395,597.870L221.167,597.753L221.186,597.319L218.981,595.674L217.623,595.208L216.404,594.987L214.034,595.038L211.672,595.984L210.158,596.304L207.742,597.232L204.707,598.050L203.690,597.900L202.019,597.945L200.871,598.068L197.627,597.199L195.567,596.470L194.599,595.837L191.839,594.604L188.881,593.616L182.853,592.521L181.826,592.217L180.787,591.648L179.487,590.182L179.027,589.469L178.333,587.849L178.174,587.119L177.895,584.910L177.830,582.921L178.098,579.402L178.056,578.013L178.026,577.312L177.727,575.688L176.917,574.285L176.557,573.870L176.137,573.168L174.523,570.216L173.985,569.598L171.981,566.874L171.270,566.206L170.098,564.266L169.117,561.982L168.919,558.874L168.807,558.073L168.508,556.923L167.750,555.010L166.474,553.086L164.648,551.169L163.256,550.182L161.879,549.432L159.833,548.628L156.084,547.933L155.047,547.915L154.081,547.714L153.854,547.842L153.229,547.842L151.166,546.877L150.560,546.489L150.250,546.141L149.977,545.537L149.622,543.836L149.508,542.849L149.579,541.879L149.536,540.836L149.295,540.305L149.394,539.281L149.551,538.951L149.167,537.487L148.443,536.133L147.789,535.254L147.143,534.651L146.355,534.174L145.403,533.918L144.196,533.973L143.386,534.394L142.719,534.833L141.753,535.932L140.901,537.451L140.503,537.853L139.719,538.516L138.629,539.061L137.237,539.354L136.512,539.336L134.140,538.055L133.828,537.963L132.791,538.018L132.280,538.329L131.840,538.842L130.931,540.214L129.766,541.184L126.888,541.911L125.571,542.637L124.684,542.798L122.953,542.758L121.202,542.154L118.659,539.427L117.679,538.732L116.415,538.274L114.839,538.219L113.759,537.817L113.063,537.140L111.331,534.431L109.612,531.923L108.973,531.117L107.894,530.220L107.056,529.762L105.337,529.213L104.400,529.231L103.874,529.359L102.127,530.843L99.678,534.595L99.154,535.101L98.282,535.533L95.878,536.228L95.666,536.601L95.449,536.713L94.542,536.898L94.566,528.916L94.592,527.353L94.542,514.596L94.591,511.459L94.592,510.822L94.584,510.233L94.616,508.246L94.618,506.460L94.642,500.301L94.656,499.511L94.926,484.396L95.167,468.655L95.196,462.472L95.196,462.453L95.224,460.447L95.252,455.640L95.281,452.288L95.281,452.103L95.252,451.901L95.316,440.749L95.370,435.776L95.328,433.311L95.341,431.234L95.398,422.719L95.390,411.817L95.391,411.580L95.387,409.195L95.399,407.042L95.391,406.522L95.437,404.597L95.446,404.200L95.459,401.187L95.463,401.166L95.480,399.760L95.492,399.300L95.551,395.656L95.589,392.348L95.601,392.208L95.642,387.518L95.650,386.620L95.673,385.588L95.812,372.989L95.970,365.779L96.022,363.049L96.168,352.230L96.225,348.552L96.227,348.179L96.444,338.684L96.503,336.430L96.504,336.416L96.528,335.362L96.606,330.589L96.823,315.915L96.848,314.497L96.820,306.536L96.765,295.590L96.847,286.071L97.043,278.743L97.052,273.842L97.083,265.586L97.101,251.996L97.093,249.105L97.089,246.394L97.098,243.670L97.103,243.280L97.107,241.206L97.095,238.185L97.104,236.393L97.083,233.744L97.044,229.391L97.097,222.810L96.988,199.941L96.934,187.373L96.926,168.526L96.945,162.473L96.868,158.870L96.920,154.319L96.894,152.705L96.912,152.576L96.909,137.728L96.896,134.250L96.896,134.224L96.847,115.903L96.818,108.268L96.830,108.255L96.834,107.631L96.843,104.890L96.848,103.109L96.772,93.123L96.758,90.821L96.733,85.182L96.733,85.156L96.579,69.435L96.596,65.947L96.599,65.768L96.523,57.745L96.541,53.649L104.512,53.239L148.808,51.972L154.705,51.776L159.818,51.645L191.934,50.445L208.273,49.734L211.188,49.704L225.261,49.107L227.991,49.084L230.974,48.862L244.679,48.424L252.363,48.120L255.715,47.873L258.470,47.777L262.206,47.625L262.632,47.606L268.512,47.359L268.711,47.359L269.932,47.321L281.422,46.902L281.550,46.902L282.075,46.883L282.359,46.845L288.595,46.693L288.340,47.683L289.281,50.866L289.702,51.602L294.886,54.570L297.287,54.437L299.687,55.445L302.337,55.232L304.504,54.138L305.048,53.155L305.049,52.256L306.633,52.608L311.305,56.548L311.766,57.318L313.503,58.215L319.221,62.190L320.149,63.511L325.423,66.021L332.331,68.511L338.290,69.337L340.831,70.643L343.592,72.797L346.932,77.995L349.063,80.331L353.062,83.580L357.362,86.294L362.371,88.168L367.575,87.241L368.929,86.621L370.771,85.259L371.596,84.448L373.392,81.734L373.616,78.726L373.000,76.399L373.934,75.078L374.687,74.639L376.612,74.269L378.585,77.482L382.261,82.071L383.515,83.174L385.430,83.192L388.570,82.074L393.119,82.936L394.105,83.938L394.006,85.731L392.545,87.727L392.844,88.937L393.683,90.568L394.236,91.347L397.373,92.345L401.580,98.117L407.340,103.810L407.453,104.455L415.814,109.837L422.099,112.819L424.191,113.333L426.731,113.370L429.659,112.429L433.818,110.432L438.537,107.198L443.693,104.792L447.613,104.111L453.664,104.452L456.945,103.997L458.905,103.315L467.611,97.612L468.254,96.938L468.634,95.925L468.833,95.812L469.284,96.268L471.588,95.736L481.701,91.830L493.376,87.924L495.847,88.151L500.059,89.857L500.378,90.635L500.975,91.147L503.901,92.512L512.493,94.029L514.922,93.954L521.953,91.715L524.310,91.525L526.000,91.639L527.904,92.473L531.327,93.326L532.179,93.061L536.127,90.558L536.708,89.776L542.675,84.924L547.106,83.215L551.921,79.383L557.163,74.276L561.864,69.149L566.026,67.458L567.701,65.957L570.911,62.574L574.234,57.991L581.905,51.546L586.933,47.626L594.262,43.287L596.350,41.440L597.344,41.497L599.574,41.840L601.783,41.240L610.916,36.407L621.068,30.520L623.933,29.488L629.727,26.329L633.617,25.012L635.611,23.583L646.156,21.983L651.255,20.732L663.383,15.241L664.270,14.495L665.393,12.963L667.681,12.602L668.055,13.535L671.479,12.253L676.752,11.033L696.484,3.804L700.467,1.855L705.354,0.000L705.357,0.261L705.372,6.404L705.366,9.235L705.381,40.508L705.362,42.917L705.357,45.416L705.362,52.625L705.355,58.377L705.364,58.654L705.367,83.436L705.392,85.433L705.383,90.904L705.391,97.983L705.416,103.124L705.416,106.726L705.411,106.725L705.379,113.829L705.384,115.137L705.379,117.215L705.366,121.053L705.366,121.166L705.373,121.259L705.373,121.372L705.371,121.373L705.375,121.728L705.375,121.733L705.375,121.958L705.377,122.424L705.396,126.412L705.444,127.716L705.415,134.749L705.416,134.776L705.430,135.343L705.458,138.423L705.430,141.501L705.430,143.994L705.439,145.909L705.394,153.082L705.398,157.927L705.391,160.224L705.413,161.775L705.413,161.786L705.407,161.786L705.416,163.501L705.388,165.500L705.397,166.355L705.402,168.270L705.402,169.888L705.415,171.218L705.420,171.811L705.425,171.983L705.420,173.755L705.425,182.446L705.416,186.199L705.402,200.189L705.288,202.895L705.303,204.004L705.306,204.173L705.414,208.366L705.412,213.524L705.403,213.696L705.416,222.693L705.407,224.367L705.416,253.130L705.000,253.468L704.469,253.641L703.839,253.606L703.464,253.730L702.497,254.380L701.595,254.832L700.852,254.992L699.489,255.959L698.478,257.106L697.897,257.498L697.215,257.729L696.772,257.714L696.235,257.486L695.040,256.181L694.754,255.962L694.086,255.663L693.360,255.700L691.638,256.331L690.052,256.660L689.031,257.379L688.318,258.279L687.525,259.707L686.566,260.812L686.245,261.048L686.073,261.036L685.025,261.961L684.552,262.685L684.259,263.663L684.284,264.486L684.407,265.315L685.005,265.967L686.054,266.900L686.463,267.394L688.034,270.035L689.209,271.850L689.581,271.996L690.004,272.394L690.758,275.252L690.945,276.792L691.354,278.698L692.624,281.041L693.563,282.027L694.025,282.337L694.551,283.700L694.650,284.428L694.465,285.921L694.153,286.855L693.287,288.460L693.216,289.038L692.321,290.699L692.165,291.240L692.065,292.267L692.165,294.282L692.108,296.315L692.236,297.023L692.179,297.247L691.753,297.769L689.920,298.515L689.338,298.926L689.139,299.522L689.423,300.455L689.545,300.560L691.184,301.144L691.866,301.704L692.534,302.412L692.832,303.419L692.676,304.836L692.235,306.103L692.093,307.501L692.377,308.768L693.500,311.190L693.840,312.438L693.926,313.090L693.500,315.064L692.974,315.660L691.795,317.876L691.525,319.124L691.610,321.544L691.170,322.865L690.716,323.498L688.642,324.894L688.628,324.745L687.577,325.452L686.512,326.624L685.170,329.447L684.779,331.424L684.495,333.823L684.239,335.050L683.600,336.408L682.606,337.523L682.264,337.686L682.023,337.924L681.677,338.409L679.055,343.387L678.857,343.987L678.668,345.212L678.282,346.455L678.209,348.877L678.457,350.211L678.557,350.366L678.714,351.106L678.756,351.551L678.614,352.573L678.415,353.297L678.259,353.649L677.861,354.151L675.347,356.082L674.481,357.270L674.225,358.086L674.240,358.866L674.439,360.072L674.836,361.056L675.007,361.223L675.319,363.004L675.319,363.468L675.234,365.174L674.978,365.954L674.553,366.574L674.398,367.007L674.405,367.864L674.339,368.274L673.955,369.301L673.757,370.654L673.737,371.078L673.873,372.706L674.021,373.249L674.209,374.883L674.009,377.538L673.578,377.849L673.137,378.383L671.878,379.248L671.396,379.678L670.707,380.739L670.551,381.344L670.546,382.020L671.000,385.262L671.643,386.839L671.764,387.585L671.693,388.071L671.428,388.720L671.287,388.898L671.094,389.001L670.819,389.001L670.012,388.865L669.391,388.557L667.942,387.473L666.114,387.004L665.430,387.052L665.024,387.176L664.651,387.479L664.424,387.884L664.187,388.741L664.130,389.520L664.226,390.053L664.628,391.149L665.173,392.203L666.051,393.329L666.359,393.836L666.904,395.786L666.818,396.706L666.481,397.359L665.520,398.255L663.172,399.342L662.484,399.907L662.058,400.429L661.795,400.969L661.676,401.447L661.781,402.530L662.235,404.068L662.313,404.533L662.355,406.985L661.959,408.948L661.802,409.411L660.491,410.871L656.551,413.734L656.085,414.373L655.693,415.366L655.573,415.885L655.905,417.075L656.226,417.789L657.734,419.758L658.016,420.044L658.960,420.641L660.308,423.205L660.597,423.638L661.025,424.027L661.284,425.030L661.278,425.437L660.979,426.578L660.694,426.977L659.951,427.432L659.154,427.726L658.120,427.888L657.751,428.089L656.740,428.799L656.459,429.150L656.160,430.117L656.085,430.729L656.037,431.593L656.192,434.496L656.040,436.366L655.592,437.421L655.454,438.161L655.497,438.368L655.419,438.884L654.711,441.075L654.093,442.251L652.410,442.979L651.798,442.979L650.416,442.670L648.801,442.620L647.633,442.861L646.575,443.338L646.062,443.743L645.085,444.792L641.299,447.888L640.131,449.106L638.843,450.259L637.996,451.366L637.555,451.759L635.871,452.924L634.252,454.285L633.706,454.855L633.314,455.549L632.816,456.163L630.723,457.804L630.006,458.616L629.718,459.092L628.525,460.301L627.075,461.544L626.314,462.709L624.115,465.044L622.780,466.848L620.848,470.693L620.749,470.693L619.385,473.066L618.846,473.802L618.277,474.372L618.008,474.593L617.482,474.832L615.437,474.942L613.877,475.308L612.866,475.678L611.545,476.424L611.208,476.716L610.692,477.231L610.014,478.549L608.637,480.067L607.954,480.898L607.527,481.567L607.157,482.225L607.072,482.507L607.152,483.411L607.040,484.171L606.840,484.598L606.236,485.161L605.660,485.422L605.346,485.442L602.753,484.667L601.724,484.720L600.204,485.325L598.652,485.469L597.948,485.860L597.134,486.692L594.846,487.589L593.812,488.294L591.710,489.993L590.776,490.563L589.437,491.554L588.440,492.426L587.737,492.844L586.410,493.320L583.705,493.592L583.177,493.521L582.484,493.270L581.533,492.285L581.172,491.753L580.875,491.047L580.185,488.536L579.897,487.123L579.341,485.069L578.486,483.869L577.368,482.811L576.223,481.893L575.228,481.323L573.680,480.973L572.317,481.176L570.669,482.187L569.896,482.849L568.517,484.778L567.644,485.807L565.635,487.797L564.172,488.935L562.636,489.934L561.192,490.554L560.074,491.539L557.915,494.128L557.617,495.597L557.546,497.966L556.850,502.371L556.821,505.619L556.523,506.628L556.111,507.178L553.936,506.981L553.507,506.791L552.573,506.130L551.409,505.737L550.691,505.643L549.912,505.772L548.860,506.083L545.753,505.431L543.912,505.402L541.917,505.658L540.761,506.063L540.008,506.579L539.177,507.477L538.811,507.994L538.197,509.130L538.111,510.650L538.161,511.131L538.290,511.730L538.790,512.971L538.952,514.062L538.913,514.464L538.763,514.740L538.449,515.168L537.554,515.766L536.031,516.062L534.223,516.561L533.852,516.825L533.429,517.409L532.945,518.511L532.598,520.271L532.416,520.717L531.784,521.494L530.603,522.063L530.191,522.395L529.764,523.073L529.693,523.751L529.978,524.813L531.346,529.038L531.496,530.225L531.359,530.793L531.315,532.245L531.353,532.992L531.696,534.830L531.583,536.697L531.455,537.466L531.227,538.253L530.972,538.747L530.248,539.753L529.055,540.815L528.472,541.199L526.952,541.858L526.114,541.912L525.532,541.821L524.794,541.601L523.742,541.034L523.047,540.851L522.365,540.833L521.967,540.961L521.726,541.181L521.513,541.693L521.470,542.754L521.584,544.144L521.825,545.297L522.209,546.101L523.004,547.473L523.430,547.967L524.431,548.813L525.390,549.503L527.336,551.404L528.131,552.537L528.557,553.397L528.557,554.987L528.430,555.718L528.141,556.168L527.461,556.766L527.164,557.344L526.953,557.997L526.786,558.904L526.823,559.470L526.927,559.709L526.338,561.164L526.062,562.596L526.216,563.684L526.485,564.248L527.179,565.023L527.783,565.560L529.591,567.670L529.711,568.328L529.374,569.351L529.162,569.737L528.784,570.049L528.277,570.263L527.775,570.303L527.158,570.260L526.144,569.924L525.519,569.671L524.422,568.938L523.995,568.519L522.609,566.764L521.459,566.023L520.684,565.869L519.926,565.944L519.595,566.073L519.004,566.475L518.074,567.673L517.162,569.205L516.937,572.044L517.045,572.610L516.570,574.195L515.531,575.778L515.112,576.242L512.849,577.887L510.807,579.145L510.295,579.219L509.485,579.089L508.050,578.382L507.813,578.230L507.020,577.322L505.448,575.984L505.301,575.639L505.251,575.296L505.490,574.212L506.566,572.879L506.756,572.516L507.583,571.611L508.093,571.275L509.149,570.009L509.285,569.814L509.495,569.048L509.193,567.575L508.341,566.189L507.511,564.530L506.691,562.293L505.506,560.299L504.565,558.444L504.047,557.941L503.337,557.415L501.971,556.914L500.861,557.061L500.638,557.235L499.653,557.477L498.786,557.576L498.277,557.527L498.005,557.433L497.751,557.222L497.627,556.976L497.524,555.828L497.382,555.188L496.913,554.000L496.302,552.830L495.791,552.081L494.754,551.093L494.072,550.783L492.581,550.691L491.203,551.002L489.968,551.532L489.570,552.044L489.172,552.922L488.590,555.499L488.093,556.687L487.752,557.217L486.729,558.002L485.295,558.953L483.804,559.647L482.426,560.579L482.071,560.980Z"
+                fill="url(#ohioFill)" stroke="url(#ohioStroke)" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+          <!-- 8 campus pins. Multi-campus city (Columbus) clustered with offsets. -->
+          <g class="ohio-pins">
+            <use href="#cphsPin" x="247" y="125" width="24" height="32"/><!-- Skyway · Toledo -->
+            <use href="#cphsPin" x="400" y="148" width="24" height="32"/><!-- Black River · Elyria -->
+            <use href="#cphsPin" x="525" y="225" width="24" height="32"/><!-- Cascade · Akron -->
+            <use href="#cphsPin" x="235" y="388" width="24" height="32"/><!-- Gem City · Dayton -->
+            <!-- Columbus: 3 campuses in a triangle -->
+            <use href="#cphsPin" x="384" y="395" width="24" height="32"/><!-- Capital City · Columbus -->
+            <use href="#cphsPin" x="438" y="385" width="24" height="32"/><!-- North Woods Fusion · Columbus -->
+            <use href="#cphsPin" x="412" y="350" width="24" height="32"/><!-- North Woods Focus · Columbus -->
+            <use href="#cphsPin" x="245" y="595" width="24" height="32"/><!-- Cincinnati -->
+          </g>
+        </svg>
+        <div class="loc-hero-block">
+          <h1 class="loc-brand-title" id="locEyebrow"></h1>
+          <h2 class="loc-rotator" id="locHeadline"></h2>
+          <p class="lead" id="locBody"></p>
+        </div>
+        <div class="loc-marquee" aria-hidden="true">
+          <div class="loc-marquee-track" id="locMarqueeTrack"></div>
+        </div>
+      </div>
+
+      <!-- MODULE: LOCATION FINDER -->
+      <div class="container" data-module="locations.finder" style="margin-top:36px;">
+        <div class="finder">
+          <span class="eyebrow" id="finderEyebrow"></span>
+          <h2 id="finderTitle"></h2>
+          <p class="lead" id="finderSub" style="margin-bottom:20px;"></p>
+          <form class="finder-form" id="finderForm" novalidate>
+            <input type="text" id="finderInput" autocomplete="postal-code" />
+            <button type="submit" class="btn btn-primary" id="finderSubmit"></button>
+            <button type="button" class="btn btn-outline" id="finderUseLocation"></button>
+          </form>
+          <p class="finder-status" id="finderStatus" aria-live="polite"></p>
+          <ol class="finder-results" id="finderResults"></ol>
+        </div>
+      </div>
+
+      <div class="container" data-module="locations.grid" style="margin-top:36px;">
+        <div class="grid cols-3" id="locGrid"></div>
+      </div>
+
+      <!-- MODULE: Interactive Ohio campus map + side key -->
+      <div class="container" data-module="locations.map" style="margin-top:48px;">
+        <div class="locations-interactive">
+          <div class="locations-map-pane" id="locInteractiveMap" aria-label="Interactive map of all Career Prep campuses across Ohio"></div>
+          <aside class="locations-map-key" aria-label="Campus list">
+            <h3>Find your campus</h3>
+            <p class="muted" style="font-size:13px;margin-bottom:16px;">Click a pin or pick from the list — we'll fly you there.</p>
+            <ul id="locMapKey"></ul>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         PAGE: SCHOOL DETAIL  (template — rendered per-location at runtime)
+         Each school in locations.items gets a page at #<slug>.
+         ============================================================ -->
+    <section id="school-page" class="page" data-page="school-page">
+
+      <!-- HERO: campus photo reel behind a navy gradient. Combines the
+           home-page value prop (eyebrow + headline + body + promise) WITH
+           the campus identifier (city + school name + address) so visitors
+           landing directly on a school page see both the broad pitch and
+           the location-specific info above the fold. Director name / phone
+           / email moved down to the Director Message + Contact modules. -->
+      <div class="hero school-hero">
+        <!-- Auto-sliding photo reel that lives INSIDE the blue hero -->
+        <div class="school-hero-reel" id="schoolHeroReel" aria-hidden="true"></div>
+        <div class="school-hero-overlay" aria-hidden="true"></div>
+        <div class="container school-hero-content">
+          <a href="#locations" class="breadcrumb">← All locations</a>
+
+          <!-- Campus identifier — promoted to top so the campus name is the
+               first thing you read. City eyebrow + huge campus name + address. -->
+          <span class="eyebrow campus-eyebrow" id="schoolEyebrow"></span>
+          <h1 class="campus-name" id="schoolName"></h1>
+          <p class="lead campus-address" id="schoolAddress"></p>
+
+          <!-- Home-page value prop, anchored below the campus name. The
+               headline rotates through cfg.hero.headlineRotation, exactly
+               like the home page. -->
+          <h2 class="school-hero-rotating-headline" id="schoolConvHeadline"></h2>
+          <div class="school-hero-body" id="schoolConvBody"></div>
+          <p class="promise" id="schoolConvPromise"></p>
+          <!-- Eyebrow hidden but retained for backwards-compatible rendering. -->
+          <span class="eyebrow" id="schoolConvEyebrow" hidden></span>
+
+          <!-- Pathway icons available at this campus — so a visitor sees at
+               a glance exactly what's offered here before they read on. -->
+          <div class="school-hero-pathways" id="schoolHeroPathways" aria-label="Career pathways at this campus"></div>
+
+          <div class="hero-cta">
+            <a class="btn btn-primary btn-pop" id="schoolApply">Apply Now</a>
+            <a class="btn btn-outline" href="#" data-action="open-quiz" id="schoolQuizCta">Take the Career Quiz</a>
+            <a class="btn btn-ghost-light" id="schoolDirections" target="_blank" rel="noopener">Get directions</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- MODULE: Campus stats — all-time enrolled + graduated. Network figures
+           by default; per-school via perSchool[slug].stats. Featured navy band
+           so proof hits immediately after the hero. -->
+      <div class="impact-stats-band" data-module="school-page.stats">
+        <div class="container impact-stats-section">
+          <span class="eyebrow">Career Prep by the numbers</span>
+          <h2 style="margin-bottom:6px;">Proof this works.</h2>
+          <p class="lead" style="margin-bottom:24px;">All-time enrolled and graduated across Career Prep — and growing every year.</p>
+          <div class="impact-stats-grid" id="schoolStatsGrid"></div>
+        </div>
+      </div>
+
+      <!-- MODULE: Trusted by — partner logos (same as home), for credibility. -->
+      <div class="container sponsored-section" data-module="school-page.sponsored" style="margin-top:48px;">
+        <span class="eyebrow" id="schoolSponsoredEyebrow"></span>
+        <div class="sponsored-grid" id="schoolSponsoredGrid"></div>
+      </div>
+
+      <!-- MODULE: Pain points (same content as the home page) — moved up so
+           "Sound like you?" hits visitors early on the school page. -->
+      <div class="container pain-points-section" data-module="school-page.painPoints" style="margin-top:64px;">
+        <span class="eyebrow" id="schoolPainPointsEyebrow"></span>
+        <h2 id="schoolPainPointsHeadline"></h2>
+        <p class="lead" id="schoolPainPointsBody" style="margin-bottom:28px;"></p>
+        <div class="pain-points-grid" id="schoolPainPointsGrid"></div>
+      </div>
+
+      <!-- MODULE: What makes our campus unique (collapsible) -->
+      <div class="container" data-module="school-page.unique" style="margin-top:48px;">
+        <span class="eyebrow">What makes us, us</span>
+        <h2 id="schoolUniqueHeading">What makes our campus unique</h2>
+        <div class="unique-block unique-spotlight is-collapsed" id="schoolUnique"></div>
+        <button class="unique-toggle" id="schoolUniqueToggle" type="button" aria-expanded="false" aria-controls="schoolUnique">Read more ↓</button>
+      </div>
+
+      <!-- MODULE: Pathways at this campus -->
+      <div class="container" data-module="school-page.pathways" style="margin-top:48px;">
+        <h2>Career pathways at this campus</h2>
+        <p class="lead" style="margin-bottom:18px;">Tap any pathway to see certifications and details.</p>
+        <div class="pathway-pills" id="schoolPathways"></div>
+      </div>
+
+      <!-- MODULE: Director intro (compact — photo + short message) -->
+      <div class="container" data-module="school-page.director" style="margin-top:48px;">
+        <span class="eyebrow">Meet the campus</span>
+        <h2 id="schoolDirectorHeading">A message from your campus director</h2>
+        <div class="director-showcase director-showcase-compact">
+          <div class="director-showcase-photo" id="schoolDirectorPhotoWrap" aria-hidden="true">
+            <div class="placeholder-tag">Director photo</div>
+          </div>
+          <div class="director-showcase-body">
+            <p class="director-name" id="schoolDirectorName"></p>
+            <div id="schoolDirectorMessage"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- MODULE: Campus photo grid -->
+      <div class="container" data-module="school-page.photos" style="margin-top:48px;">
+        <span class="eyebrow">Inside the campus</span>
+        <h2>Campus photos</h2>
+        <div class="photo-reel" id="schoolPhotoReel"></div>
+      </div>
+
+      <!-- MODULE: Campus gallery — pulled live from a Drive folder per campus,
+           sectioned by sub-folder name. Auto-hides for any campus that hasn't
+           had a gallery folder URL configured yet. -->
+      <div class="container" data-module="school-page.gallery" style="margin-top:64px;">
+        <span class="eyebrow">Campus gallery</span>
+        <h2 id="schoolGalleryHeading">Photo gallery</h2>
+        <p class="lead" id="schoolGallerySub" style="margin-bottom:20px;">A look at what life on campus actually looks like.</p>
+        <div id="schoolGallery" class="school-gallery-host"></div>
+      </div>
+
+      <!-- MODULE: School calendar -->
+      <div class="container" data-module="school-page.calendar" style="margin-top:48px;">
+        <h2>School calendar</h2>
+        <div class="calendar-host" id="schoolCalendar"></div>
+      </div>
+
+      <!-- MODULE: Contact info — centered in the middle of the page -->
+      <div class="container" data-module="school-page.contact" style="margin-top:72px;">
+        <div class="campus-contact-card" id="schoolContact"></div>
+      </div>
+
+      <!-- MODULE: Why we're different — comparison chart -->
+      <div class="container" data-module="school-page.compare" style="margin-top:72px;">
+        <span class="eyebrow">Why we're different</span>
+        <h2 id="schoolCompareHeadline" style="margin-bottom:20px;"></h2>
+        <div style="overflow-x:auto;">
+          <table class="compare" id="schoolCompareTable">
+            <thead><tr id="schoolCompareHead"></tr></thead>
+            <tbody id="schoolCompareBody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- MODULE: Wraparound services — circle graph (same as home) -->
+      <div class="mission-strip" data-module="school-page.wraparound" style="margin-top:24px;">
+        <div class="container">
+          <h2 class="mission-big-headline" id="schoolWraparoundHeadline">Wraparound support, no matter what</h2>
+          <h3 class="mission-section-eyebrow">What every student gets, no matter what</h3>
+          <ol class="ecosystem mission-ecosystem" id="schoolEcosystem"></ol>
+        </div>
+      </div>
+
+      <!-- MODULE: Student testimonials — campus quotes if available, else the
+           network-wide voices. Placed right after wraparound support. -->
+      <div class="container" data-module="school-page.testimonials" style="margin-top:64px;">
+        <span class="eyebrow">Student voices</span>
+        <h2 id="schoolTestimonialsHeading">What students are saying</h2>
+        <div class="school-testimonials" id="schoolTestimonials"></div>
+      </div>
+
+      <!-- MODULE: Mountain graph — the four-step climb to your diploma -->
+      <div class="how-it-works" data-module="school-page.howItWorks">
+        <div class="container">
+          <span class="eyebrow" id="schoolHiwEyebrow"></span>
+          <h2 id="schoolHiwHeadline" class="hiw-headline-onerow">We'll climb with you every step of the way.</h2>
+          <p class="lead hiw-sub" id="schoolHiwSub" style="margin-bottom:24px;"></p>
+
+          <div class="hiw-mountain mountain-journey" aria-label="The four-step climb toward your diploma">
+            <svg class="mountain-bg" viewBox="0 0 1000 600" preserveAspectRatio="none" aria-hidden="true">
+              <defs>
+                <linearGradient id="schoolHiwSky" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#0a2a6b"/>
+                  <stop offset="100%" stop-color="#071E4F"/>
+                </linearGradient>
+                <linearGradient id="schoolHiwFace" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#15EC75" stop-opacity=".35"/>
+                  <stop offset="100%" stop-color="#15EC75" stop-opacity=".05"/>
+                </linearGradient>
+              </defs>
+              <rect width="1000" height="600" fill="url(#schoolHiwSky)"/>
+              <polygon points="0,600 250,200 480,420 700,260 1000,600" fill="rgba(255,255,255,.06)"/>
+              <polygon points="0,600 400,80 1000,600" fill="url(#schoolHiwFace)" stroke="rgba(21,236,117,.45)" stroke-width="2"/>
+              <polygon points="378,108 400,80 422,108 410,118 400,114 390,118" fill="rgba(255,255,255,.85)"/>
+              <path class="hiw-climb-path"
+                    d="M 90 540 C 240 480, 280 420, 360 360 C 440 300, 460 240, 400 110"
+                    fill="none" stroke="#15EC75" stroke-width="4" stroke-linecap="round"
+                    stroke-dasharray="8 12"/>
+            </svg>
+            <ol class="mountain-items hiw-mountain-items" id="schoolHiwSteps"></ol>
+            <div class="mountain-peak hiw-peak" aria-label="Your diploma — the summit">
+              <span class="peak-icon" aria-hidden="true">🎓</span>
+              <span class="peak-label">Your diploma</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- MODULE: Closing CTA band -->
+      <div class="cta-band" data-module="school-page.ctaBand" style="margin-top:72px;">
+        <div class="container row">
+          <div>
+            <span class="eyebrow on-dark">Let's talk</span>
+            <h2 id="schoolCtaHeadline">Change your life today. Land your dream career.</h2>
+            <p style="max-width:54ch;">100% free. No tuition. No catch. Just a path to a real diploma — and a real future.</p>
+          </div>
+          <div style="display:flex;gap:12px;flex-wrap:wrap;">
+            <a class="btn btn-primary btn-pop" id="schoolCtaApply">Apply now</a>
+            <a class="btn btn-ghost-light" href="#" data-action="open-quiz">Take the Career Quiz</a>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ============================================================
+         PAGE: START TODAY
+         ============================================================ -->
+    <section id="start" class="page" data-page="start">
+      <div class="container" data-module="start.intro">
+        <span class="eyebrow" id="startEyebrow"></span>
+        <h1 class="start-headline-anim" id="startHeadline"></h1>
+        <p class="start-subheadline" id="startSubheadline"></p>
+        <!-- Journey path — animated dotted line drawing itself across, with footstep milestones -->
+        <svg class="start-journey-path" viewBox="0 0 800 90" aria-hidden="true">
+          <defs>
+            <linearGradient id="journeyGradient" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%"   stop-color="#15EC75"/>
+              <stop offset="50%"  stop-color="#19FF80"/>
+              <stop offset="100%" stop-color="#15EC75"/>
+            </linearGradient>
+          </defs>
+          <!-- Curved journey path -->
+          <path class="journey-path-line" d="M 30 70 Q 130 10 260 50 T 520 30 T 770 50"
+                stroke="url(#journeyGradient)" stroke-width="4" fill="none"
+                stroke-linecap="round" stroke-dasharray="8 10"/>
+          <!-- Milestone footstep markers -->
+          <g class="journey-steps">
+            <circle cx="30"  cy="70" r="9"/>
+            <circle cx="260" cy="50" r="9"/>
+            <circle cx="520" cy="30" r="9"/>
+            <circle cx="770" cy="50" r="11"/>
+          </g>
+          <!-- Destination flag at the end -->
+          <g transform="translate(770,50)" class="journey-flag">
+            <path d="M 0 -2 L 0 -32 L 18 -26 L 0 -22 Z" fill="#15EC75" stroke="#071E4F" stroke-width="2" stroke-linejoin="round"/>
+          </g>
+        </svg>
+        <p class="lead" id="startBody"></p>
+      </div>
+
+      <!-- MODULE: Always-open banner -->
+      <div class="container" data-module="start.alwaysOpen" style="margin-top:24px;">
+        <div class="always-open" id="startAlwaysOpen"></div>
+      </div>
+
+      <!-- MODULE: 3-step process -->
+      <div class="container" data-module="start.process" style="margin-top:48px;">
+        <div class="grid cols-3 steps" id="startSteps"></div>
+      </div>
+
+      <!-- MODULE: Apply — eye-catching ZIP picker that loads the matching
+           campus's HubSpot application form inline (embedded iframe). -->
+      <div class="container" data-module="start.apply" style="margin-top:56px;">
+        <div class="apply-block apply-zip-block">
+          <span class="eyebrow" id="applyEyebrow"></span>
+          <h2 id="applyTitle"></h2>
+          <p class="lead" id="applyBody" style="margin-bottom:24px;"></p>
+          <form class="apply-zip-form apply-zip-spotlight" id="applyZipForm" novalidate>
+            <label for="applyZipInput" class="apply-zip-label">
+              <span class="apply-zip-pin" aria-hidden="true">📍</span>
+              Please enter your zip code to get started
+            </label>
+            <div class="apply-zip-row">
+              <input type="text" id="applyZipInput" inputmode="numeric" autocomplete="postal-code"
+                     placeholder="ZIP code" maxlength="10" required />
+              <button type="submit" class="btn btn-primary btn-pop" id="applyZipBtn">Apply now</button>
+            </div>
+            <p class="apply-zip-help">We'll match you to your closest Career Prep campus and load the right application form right here on the page.</p>
+            <p class="apply-zip-status" id="applyZipStatus" aria-live="polite"></p>
+          </form>
+          <!-- Filled in when the ZIP resolves to a campus — embedded inline form. -->
+          <div class="apply-zip-result" id="applyZipResult" hidden>
+            <div class="apply-zip-match">
+              <span class="apply-zip-match-eyebrow">Closest campus</span>
+              <h3 class="apply-zip-match-name" id="applyZipCampusName"></h3>
+              <p class="apply-zip-match-meta" id="applyZipCampusMeta"></p>
+              <button type="button" class="apply-zip-change-link" id="applyZipChange">← Use a different ZIP</button>
+            </div>
+            <div class="apply-zip-embed-wrap">
+              <iframe id="applyZipEmbed" class="apply-zip-embed"
+                      title="Career Prep High School application form"
+                      loading="lazy" referrerpolicy="no-referrer"></iframe>
+            </div>
+            <p class="apply-zip-pickother">
+              Not the right campus? <a href="#locations">Pick another location</a>.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- MODULE: Quiet "not ready" link to the interest form page -->
+      <div class="container" data-module="start.interestNudge" style="margin-top:36px;text-align:center;">
+        <a class="interest-nudge" id="interestNudgeLink"></a>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         PAGE: INTEREST FORM (separate page so apply stays primary)
+         ============================================================ -->
+    <section id="interest-form" class="page" data-page="interest-form">
+      <div class="container" data-module="interest-form.intro">
+        <span class="eyebrow" id="interestEyebrow"></span>
+        <h1 id="interestHeadline"></h1>
+        <p class="lead" id="interestBody"></p>
+      </div>
+      <div class="container" data-module="interest-form.form" style="margin-top:32px;">
+        <div class="interest-wrap">
+          <!-- HubSpot Forms v2 embed (this is the older HubSpot embed format —
+               the interest form was authored as a v2 form, so it uses this script
+               and a hbspt.forms.create() call instead of the v3 .hs-form-frame div). -->
+          <div id="interestFormHost"></div>
+          <script charset="utf-8" type="text/javascript" src="https://js.hsforms.net/forms/embed/v2.js"></script>
+          <script>
+            (function () {
+              var tries = 0;
+              var maxTries = 60;
+              function tryRender() {
+                if (window.hbspt && window.hbspt.forms) {
+                  window.hbspt.forms.create({
+                    portalId: "23862493",
+                    formId:   "6cd1f241-4d87-46a0-9b15-cff2b2c7ff56",
+                    region:   "na1",
+                    target:   "#interestFormHost"
+                  });
+                } else if (tries++ < maxTries) {
+                  setTimeout(tryRender, 200);
+                }
+              }
+              tryRender();
+            })();
+          </script>
+        </div>
+        <p style="margin-top:32px;text-align:center;">
+          <a class="btn btn-primary btn-pop" id="interestSecondaryCta"></a>
+        </p>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         PAGE: TESTIMONIALS
+         ============================================================ -->
+    <section id="testimonials" class="page" data-page="testimonials">
+      <div class="container" data-module="testimonials.intro">
+        <span class="eyebrow" id="testimonialsEyebrow"></span>
+        <h1 id="testimonialsHeadline"></h1>
+        <p class="lead" id="testimonialsBody"></p>
+      </div>
+      <div class="container" data-module="testimonials.grid" style="margin-top:36px;">
+        <div class="grid cols-3 testimonials-grid" id="testimonialsGrid"></div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         PAGE: FAQ
+         ============================================================ -->
+    <section id="faq" class="page" data-page="faq">
+      <div class="container" data-module="faq.intro">
+        <span class="eyebrow" id="faqEyebrow"></span>
+        <h1 id="faqHeadline"></h1>
+        <p class="lead" id="faqBody"></p>
+      </div>
+      <div class="container" data-module="faq.list" style="margin-top:32px;">
+        <div class="faq" id="faqList"></div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         PAGE: RESOURCES
+         ============================================================ -->
+    <section id="resources" class="page" data-page="resources">
+      <div class="container" data-module="resources.intro">
+        <span class="eyebrow" id="resEyebrow"></span>
+        <h1 id="resHeadline"></h1>
+        <p class="lead" id="resBody"></p>
+      </div>
+
+      <!-- FAQ moved to its own page (#faq) — see <section id="faq"> below. -->
+
+      <!-- MODULE: District-wide docs (shown FIRST per spec) -->
+      <div class="container" data-module="resources.districtDocs" style="margin-top:64px;">
+        <h2 id="districtTitle"></h2>
+        <p class="lead" id="districtSub" style="margin-bottom:20px;"></p>
+        <div class="grid cols-2" id="districtDocs"></div>
+        <div class="notice" style="margin-top:18px;" id="districtNote"></div>
+      </div>
+
+      <!-- MODULE: Per-school docs (with category toggle) -->
+      <div class="container" data-module="resources.schoolDocs" style="margin-top:64px;">
+        <h2 id="schoolDocsTitle"></h2>
+        <p class="lead" id="schoolDocsSub" style="margin-bottom:20px;"></p>
+        <div class="doc-toggle" id="schoolDocsToggle" role="tablist" aria-label="Resource type"></div>
+        <p class="muted" id="schoolDocsActiveLabel" style="font-size:14px;margin:14px 0 12px;"></p>
+        <div class="school-docs-list" id="schoolDocs"></div>
+        <div class="notice" style="margin-top:18px;" id="driveHowTo"></div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ==========================================================
+       CAREER QUIZ MODAL
+       Opens from the hero CTA "Take the Career Quiz" (or any link with
+       data-action="open-quiz"). 6 multiple-choice questions, weighted to
+       the pathway slugs from site-config.js. Result shows the top match
+       with a CTA into the pathway detail page.
+       ========================================================== -->
+  <div class="cq-overlay" id="cqOverlay" role="dialog" aria-modal="true" aria-labelledby="cqTitle" aria-hidden="true">
+    <div class="cq-modal" role="document">
+      <button type="button" class="cq-close" id="cqClose" aria-label="Close">×</button>
+      <header class="cq-header">
+        <span class="eyebrow" id="cqEyebrow">Career Quiz</span>
+        <h2 class="cq-title" id="cqTitle">Find Your Pathway</h2>
+        <p class="cq-sub" id="cqSub">Six quick questions. We'll point you to a pathway that fits.</p>
+        <div class="cq-progress" aria-hidden="true"><div class="cq-progress-bar" id="cqProgressBar"></div></div>
+      </header>
+      <div class="cq-body" id="cqBody"></div>
+      <footer class="cq-footer" id="cqFooter"></footer>
+    </div>
+  </div>
+
+  <!-- ==========================================================
+       FIRST-TIME VISITOR POP-UP
+       Shown once per browser (localStorage-gated). Submits to HubSpot
+       Forms API. Dismissible from the X button or backdrop click — the
+       dismissal is also remembered so it never returns for this visitor.
+       ========================================================== -->
+  <div class="ftv-overlay" id="ftvOverlay" role="dialog" aria-modal="true" aria-labelledby="ftvTitle" aria-hidden="true">
+    <div class="ftv-modal">
+      <button type="button" class="ftv-close" id="ftvClose" aria-label="Close">×</button>
+      <h3 class="ftv-title" id="ftvTitle">First Time Here?</h3>
+      <p class="ftv-sub" id="ftvSub">Tell us a little about you and we'll keep you in the loop. Takes 30 seconds.</p>
+
+      <div class="ftv-toggle" role="tablist" aria-label="I am a">
+        <button type="button" class="ftv-toggle-btn is-active" data-audience="student" role="tab" aria-selected="true">I'm a Student</button>
+        <button type="button" class="ftv-toggle-btn"           data-audience="parent"  role="tab" aria-selected="false">I'm a Parent / Guardian</button>
+      </div>
+
+      <form class="ftv-form" id="ftvForm" novalidate>
+        <div class="ftv-row ftv-row-2">
+          <label class="ftv-field">
+            <span>First name</span>
+            <input type="text" name="firstname" autocomplete="given-name" required>
+          </label>
+          <label class="ftv-field">
+            <span>Last name</span>
+            <input type="text" name="lastname" autocomplete="family-name" required>
+          </label>
+        </div>
+        <label class="ftv-field">
+          <span>Email</span>
+          <input type="email" name="email" autocomplete="email" required>
+        </label>
+        <div class="ftv-row ftv-row-2">
+          <label class="ftv-field">
+            <span>Phone</span>
+            <input type="tel" name="phone" autocomplete="tel" required>
+          </label>
+          <label class="ftv-field">
+            <span>Birthdate</span>
+            <input type="date" name="date_of_birth" required>
+          </label>
+        </div>
+        <input type="hidden" name="audience_type" id="ftvAudience" value="student">
+        <p class="ftv-error" id="ftvError" role="alert" hidden></p>
+        <p class="ftv-success" id="ftvSuccess" hidden>Thanks — we'll be in touch.</p>
+        <div class="ftv-actions">
+          <button type="button" class="btn btn-ghost ftv-later" id="ftvLater">Not now</button>
+          <button type="submit"  class="btn btn-primary btn-pop" id="ftvSubmit">Send it</button>
+        </div>
+        <p class="ftv-fineprint">We use this to follow up — we won't share it. You can opt out anytime.</p>
+      </form>
+    </div>
+  </div>
+
+  <!-- ==========================================================
+       FOOTER
+       ========================================================== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-row">
+        <div class="footer-brand">
+          <img class="footer-logo" id="footerLogo" src="Asset 4@1x.png" alt="Career Prep High School" />
+          <p class="tagline" id="footerTagline"></p>
+        </div>
+        <ul class="footer-links" id="footerQuickLinks"></ul>
+      </div>
+      <p class="fine" id="finePrint"></p>
+    </div>
+  </footer>
+
+  <!-- Document list modal — opens when a resource tile is clicked.
+       Files are fetched from Drive via the public API and rendered inline.
+       Visitors never leave the site — Download buttons stream the file
+       straight from Google's CDN as an attachment. -->
+  <div class="doc-modal" id="docModal" hidden role="dialog" aria-modal="true" aria-labelledby="docModalTitle">
+    <div class="doc-modal-backdrop" data-modal-close="true"></div>
+    <div class="doc-modal-panel" role="document">
+      <div class="doc-modal-head">
+        <div>
+          <span class="doc-modal-eyebrow" id="docModalEyebrow"></span>
+          <h3 id="docModalTitle"></h3>
+        </div>
+        <button type="button" class="doc-modal-close" data-modal-close="true" aria-label="Close">×</button>
+      </div>
+      <div class="doc-modal-body">
+        <div class="doc-file-list" id="docModalList" aria-live="polite"></div>
+        <div class="doc-modal-empty" id="docModalEmpty" hidden>
+          <p>Documents for this folder are still being uploaded. Check back soon.</p>
+        </div>
+      </div>
+      <div class="doc-modal-foot">
+        <p class="doc-modal-hint" id="docModalHint">Click Download next to any file to save it to your device.</p>
+        <button type="button" class="btn btn-outline" data-modal-close="true">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Message modal — the "Have a question? Send a message" button opens this.
+       Sends straight from the site via Formspree (see brand.formspree in
+       site-config.js). Each message is tagged with the campus the visitor is
+       viewing + that campus's enrollment email so it routes to the right school. -->
+  <div class="doc-modal" id="msgModal" hidden role="dialog" aria-modal="true" aria-labelledby="msgModalTitle">
+    <div class="doc-modal-backdrop" data-msg-close="true"></div>
+    <div class="doc-modal-panel" role="document">
+      <div class="doc-modal-head">
+        <div>
+          <span class="doc-modal-eyebrow">Contact</span>
+          <h3 id="msgModalTitle">Send us a message</h3>
+        </div>
+        <button type="button" class="doc-modal-close" data-msg-close="true" aria-label="Close">×</button>
+      </div>
+      <div class="doc-modal-body">
+        <p class="msg-route-line" id="msgRouteLine"></p>
+        <form id="msgForm" class="msg-form" novalidate>
+          <div class="msg-toggle" role="tablist" aria-label="I am a">
+            <button type="button" class="msg-toggle-btn is-active" data-audience="student" role="tab" aria-selected="true">I'm a Student</button>
+            <button type="button" class="msg-toggle-btn"           data-audience="parent"  role="tab" aria-selected="false">I'm a Parent / Guardian</button>
+          </div>
+          <div class="msg-row-2">
+            <div class="msg-field">
+              <label for="msgFirst">First name</label>
+              <input type="text" id="msgFirst" name="firstname" autocomplete="given-name" required />
+            </div>
+            <div class="msg-field">
+              <label for="msgLast">Last name</label>
+              <input type="text" id="msgLast" name="lastname" autocomplete="family-name" required />
+            </div>
+          </div>
+          <div class="msg-field">
+            <label for="msgEmail">Email</label>
+            <input type="email" id="msgEmail" name="email" autocomplete="email" required />
+          </div>
+          <div class="msg-row-2">
+            <div class="msg-field">
+              <label for="msgPhone">Callback number</label>
+              <input type="tel" id="msgPhone" name="phone" autocomplete="tel" required />
+            </div>
+            <div class="msg-field" id="msgDobField">
+              <label for="msgDob">Date of birth</label>
+              <input type="date" id="msgDob" name="date_of_birth" autocomplete="bday" />
+            </div>
+          </div>
+          <div class="msg-field">
+            <label for="msgCampusSelect">Which campus?</label>
+            <select id="msgCampusSelect"></select>
+            <div class="msg-zip-row">
+              <input type="text" id="msgZip" name="zip" inputmode="numeric" autocomplete="postal-code"
+                     placeholder="Or enter your ZIP and we'll pick the closest" />
+              <button type="button" class="btn btn-outline btn-sm" id="msgZipBtn">Find closest</button>
+            </div>
+            <span class="msg-zip-status" id="msgZipStatus" aria-live="polite"></span>
+          </div>
+          <div class="msg-field">
+            <label for="msgMessage">Message</label>
+            <textarea id="msgMessage" name="message" rows="4" required></textarea>
+          </div>
+          <!-- Hidden routing/context fields — filled by the script. -->
+          <input type="hidden" name="audience_type" id="msgAudience" value="student" />
+          <input type="hidden" name="campus" id="msgCampus" />
+          <input type="hidden" name="campus_email" id="msgCampusEmail" />
+          <input type="hidden" name="_subject" id="msgSubject" />
+          <div class="msg-feedback msg-feedback-error" id="msgError" hidden></div>
+          <div class="msg-form-actions">
+            <button type="button" class="btn btn-outline" data-msg-close="true">Cancel</button>
+            <button type="submit" class="btn btn-primary" id="msgSubmitBtn">Send message</button>
+          </div>
+        </form>
+        <!-- Shown after a successful send (sibling of the form so it stays
+             visible once the form is hidden). -->
+        <div class="msg-feedback" id="msgSuccess" hidden>Thanks! Your message is on its way — someone will get back to you soon.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Lightbox modal — opens when a campus gallery image is clicked.
+       Shows the image at a larger size, on-site (never redirects to Drive). -->
+  <div class="gallery-lightbox" id="galleryLightbox" hidden role="dialog" aria-modal="true" aria-label="Gallery image">
+    <button type="button" class="gallery-lightbox-backdrop" data-lightbox-close="true" aria-label="Close"></button>
+    <button type="button" class="gallery-lightbox-prev" id="galleryLightboxPrev" aria-label="Previous image">‹</button>
+    <button type="button" class="gallery-lightbox-next" id="galleryLightboxNext" aria-label="Next image">›</button>
+    <button type="button" class="gallery-lightbox-close" data-lightbox-close="true" aria-label="Close">×</button>
+    <figure class="gallery-lightbox-frame">
+      <img id="galleryLightboxImg" alt="" />
+    </figure>
+  </div>
+
+  <!-- Floating action buttons — visible on Home + Start Today.
+       Left: Find a Campus Near You (collapsible finder panel)
+       Right: Have a question? Send a message (mailto, opens email client) -->
+  <div class="floating-actions" id="floatingActions" aria-label="Quick actions">
+    <button type="button" class="fa-fold" id="faFold" aria-label="Hide quick actions" title="Hide">Hide ›</button>
+    <div class="quick-finder" id="quickFinder" data-collapsed="true" aria-hidden="false">
+      <button class="quick-finder-toggle" id="quickFinderToggle" type="button" aria-expanded="false" aria-controls="quickFinderPanel">
+        <span class="qf-icon" aria-hidden="true">📍</span>
+        <span class="qf-toggle-label">Find a Campus Near You</span>
+      </button>
+      <div class="quick-finder-panel" id="quickFinderPanel" role="region" aria-label="Find your closest campus">
+        <div class="qf-head">
+          <strong>Find your closest campus</strong>
+          <button type="button" class="qf-close" id="quickFinderClose" aria-label="Close">×</button>
+        </div>
+        <p class="qf-sub">Enter an address or ZIP and we'll show schools nearest you.</p>
+        <form class="qf-form" id="quickFinderForm" novalidate>
+          <input type="text" id="quickFinderInput" placeholder="ZIP or address" autocomplete="postal-code" />
+          <button type="submit" class="btn btn-primary btn-sm">Find</button>
+        </form>
+        <button type="button" class="qf-use-location" id="quickFinderUseLocation">📌 Use my location</button>
+        <p class="qf-status" id="quickFinderStatus" aria-live="polite"></p>
+        <ol class="qf-results" id="quickFinderResults"></ol>
+      </div>
+    </div>
+    <a class="ask-question" id="askQuestionBtn" href="#" aria-label="Have a question? Send us a message">
+      <span class="qf-icon" aria-hidden="true">✉️</span>
+      <span class="ask-label">Have a question? Send a message</span>
+    </a>
+  </div>
+  <!-- Small tab to bring the quick actions back after they've been folded away. -->
+  <button type="button" class="fa-reopen" id="faReopen" aria-label="Show quick actions" hidden>‹ Quick links</button>
+
+  <script src="site-config.js?v=2026-06-10bj"></script>
+  <script src="script.js?v=2026-06-10bj"></script>
+</body>
+</html>
