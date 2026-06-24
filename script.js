@@ -3235,10 +3235,22 @@
       }
     } catch (err) {
       list.innerHTML = "";
-      list.appendChild(el("p", { class: "doc-file-error" },
-        "Couldn't load this folder's files. The folder may not be public, or the API key may need to be re-checked. " +
-        "(" + (err.message || String(err)) + ")"
-      ));
+      const msg = err && err.message ? err.message : String(err);
+      if (/referer|HTTP_REFERRER/i.test(msg)) {
+        // The Google API key is HTTP-referrer restricted and this domain
+        // isn't on its allow-list, so Drive rejects the request.
+        list.appendChild(el("p", { class: "doc-file-error" },
+          "This domain (" + window.location.origin + ") isn't on the Google API key's " +
+          "allowed-referrers list, so Google is blocking the file list. Add " +
+          window.location.origin + "/* to the key's HTTP-referrer restrictions in Google " +
+          "Cloud Console → APIs & Services → Credentials → (the key) → Application restrictions."
+        ));
+      } else {
+        list.appendChild(el("p", { class: "doc-file-error" },
+          "Couldn't load this folder's files. The folder may not be public, or the API key may need to be re-checked. " +
+          "(" + msg + ")"
+        ));
+      }
     }
   }
 
